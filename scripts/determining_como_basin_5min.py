@@ -15,7 +15,7 @@ output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/como/"
 cleanOutputDir = False
 if cleanOutputDir and os.path.exist(output_folder):
     shutil.rmtree(output_folder)
-if os.path.exist(output_folder) == False: os.makedirs(output_folder)
+if os.path.exists(output_folder) == False: os.makedirs(output_folder)
 
 # go to the the output folder
 os.chdir(output_folder)
