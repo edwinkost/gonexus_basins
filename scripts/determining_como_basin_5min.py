@@ -32,7 +32,7 @@ clone_map = ldd_map_file
 pcr.setclone(clone_map)
 
 # convert the original input file to 5 arcmin resolution at the global extent, and read it
-cmd = 'gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -tr 0.08333333333333333333333333333333333333333333333333333 0.08333333333333333333333333333333333333333333333333333 -te -180 -90 180 90 ' + os.path.basename(original_input_file) + " " + os.path.basename(original_input_file) + ".tif"
+cmd = 'gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -tr 0.08333333333333333333333333333333333333333333333333333 0.08333333333333333333333333333333333333333333333333333 -te -180 -90 180 90 ' + original_input_file + " " + os.path.basename(original_input_file) + ".tif"
 print(cmd); subprocess.run(cmd.split(), check = True)
 
 
