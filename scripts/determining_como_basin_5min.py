@@ -30,7 +30,13 @@ cell_area_file = "/scratch/depfg/sutan101/data/pcrglobwb_input_aqueduct/version_
 clone_map = ldd_map_file
 pcr.setclone(clone_map)
 
-# convert the original input file to 5 arcmin resolution at the global extent, and read it
+# read ldd and calculate catchment area (m2)
+ldd_map           = pcr.lddrepair(pcr.ldd(pcr.readmap(ldd_map_file)))
+cell_area_m2      = pcr.readmap(cell_area_file)
+catchment_area_m2 = pcr.catchmenttotal(cell_area_m2, ldd_map)
+
+
+# convert the original basin input file to 5 arcmin resolution at the global extent, and read it
 cmd = 'gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -tr 0.08333333333333333333333333333333333333333333333333333 0.08333333333333333333333333333333333333333333333333333 -te -180 -90 180 90 ' + original_input_file + " " + os.path.basename(original_input_file) + ".tif"
 print(cmd); os.system(cmd)
 # - convert to map
@@ -40,5 +46,21 @@ print(cmd); os.system(cmd)
 cmd = 'mapattr -c ' + clone_map + " " + os.path.basename(original_input_file) + ".tif.map"
 print(cmd); os.system(cmd)
 # - read the map
-basin_5min_original = pcr.readmap(os.path.basename(original_input_file) + ".tif.map")
+basin_5min_original = pcr.boolean(pcr.readmap(os.path.basename(original_input_file) + ".tif.map"))
+basin_5min_original = pcr.ifthen(basin_5min_original, basin_5min_original)
 pcr.aguila(basin_5min_original) 
+
+
+# define the basin according to pcrglobwb ldd
+basin_5min_original_catchment_area_m2 = pcr.ifthen(basin_5min_original, catchment_area_m2)
+basin_5min_pcrglobwb = pcr.ifthen(basin_5min_original_catchment_area_m2 = pcr.mapmaximum(basin_5min_original_catchment_area_m2), pcr.boolean(1.0))
+basin_5min_pcrglobwb = pcr.catchment(ldd_map, basin_5min_pcrglobwb)
+pcr.aguila(basin_5min_pcrglobwb)
+# - extend five cells downstream
+basin_5min_pcrglobwb_scalar  = pcr.scalar(basin_5min_pcrglobwb)
+basin_5min_pcrglobwb_scalar += pcr.upstream(ldd_map, basin_5min_pcrglobwb_scalar)
+basin_5min_pcrglobwb_scalar += pcr.upstream(ldd_map, basin_5min_pcrglobwb_scalar)
+basin_5min_pcrglobwb_scalar += pcr.upstream(ldd_map, basin_5min_pcrglobwb_scalar)
+basin_5min_pcrglobwb_scalar += pcr.upstream(ldd_map, basin_5min_pcrglobwb_scalar)
+basin_5min_pcrglobwb_scalar += pcr.upstream(ldd_map, basin_5min_pcrglobwb_scalar)
+pcr.aguila(basin_5min_pcrglobwb_scalar)
