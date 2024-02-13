@@ -53,7 +53,7 @@ pcr.aguila(basin_5min_original)
 
 # define the basin according to pcrglobwb ldd
 basin_5min_original_catchment_area_m2 = pcr.ifthen(basin_5min_original, catchment_area_m2)
-basin_5min_pcrglobwb = pcr.ifthen(basin_5min_original_catchment_area_m2 = pcr.mapmaximum(basin_5min_original_catchment_area_m2), pcr.boolean(1.0))
+basin_5min_pcrglobwb = pcr.ifthen(basin_5min_original_catchment_area_m2 == pcr.mapmaximum(basin_5min_original_catchment_area_m2), pcr.boolean(1.0))
 basin_5min_pcrglobwb = pcr.catchment(ldd_map, basin_5min_pcrglobwb)
 pcr.aguila(basin_5min_pcrglobwb)
 # - extend five cells downstream
