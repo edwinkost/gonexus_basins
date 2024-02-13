@@ -127,7 +127,8 @@ ldd_map_local = pcr.lddrepair(pcr.ldd(vos.readPCRmapClone(v = ldd_map_file, \
                                                           absolutePath = None, \
                                                           isLddMap = True, \
                                                           cover = None, \
-                                                          isNomMap = False))
+                                                          isNomMap = False)\
+                              ))
 ldd_map_local = pcr.lddmask(ldd_map_local, basin_5min_pcrglobwb_local)
 pcr.aguila(ldd_map_local)
 
