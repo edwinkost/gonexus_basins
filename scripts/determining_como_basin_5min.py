@@ -23,7 +23,7 @@ tmp_folder    = output_folder + "/tmp/"
 cleanOutputDir = False
 if cleanOutputDir and os.path.exist(output_folder):
     shutil.rmtree(output_folder)
-if os.path.exists(output_folder) == False: os.makedirs(tmp_folder)
+if os.path.exists(output_folder) == False or os.path.exists(tmp_folder) == False: os.makedirs(tmp_folder)
     
 
 # go to the the output folder
