@@ -134,4 +134,12 @@ ldd_map_local = pcr.lddrepair(pcr.ldd(vos.readPCRmapClone(v = ldd_map_file, \
 ldd_map_local = pcr.lddmask(ldd_map_local, pcr.boolean(basin_5min_pcrglobwb_local))
 pcr.aguila(ldd_map_local)
 
+
+# calculate strahler order (local)
+
+
+# calculate catchment area (local)
+
+
+# perform cdo for the variables that you want
                                                  
