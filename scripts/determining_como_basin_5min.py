@@ -7,6 +7,8 @@ import shutil
 
 import pcraster as pcr
 
+import virtualOS as vos
+
 
 # code/name for the case area
 code_name = "como"
