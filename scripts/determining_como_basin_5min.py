@@ -93,6 +93,7 @@ xmin, ymin, xmax, ymax = vos.boundingBox(basin_5min_pcrglobwb)
 num_rows = int(round(ymax - ymin) / float(cell_size_in_string))
 num_cols = int(round(xmax - xmin) / float(cell_size_in_string))
 
+
 # create a local clone map and set the clone to it
 clone_local_map_file = "clone_5min_" + str(code_name)  + ".map"
 cmd = "mapattr -s -R %s -C %s -B -P yb2t -x %s -y %s -l %s %s" %(str(num_rows), str(num_cols), str(xmin), str(ymax), str(cell_size_in_string), clone_local_map_file)
@@ -130,16 +131,79 @@ ldd_map_local = pcr.lddrepair(pcr.ldd(vos.readPCRmapClone(v = ldd_map_file, \
                                                           isLddMap = True, \
                                                           cover = None, \
                                                           isNomMap = False)\
-                              ))
 ldd_map_local = pcr.lddmask(ldd_map_local, pcr.boolean(basin_5min_pcrglobwb_local))
-pcr.aguila(ldd_map_local)
-
 
 # calculate strahler order (local)
+strahler_order_local = pcr.streamoder(ldd_map_local)
+
+# get the local cell area (unit: m2)
+cell_area_m2_local = vos.readPCRmapClone(v = cell_area_file, \
+                                         cloneMapFileName = clone_local_map_file, \
+                                         tmpDir = tmp_folder, \
+                                         absolutePath = None, \
+                                         isLddMap = False, \
+                                         cover = None, \
+                                         isNomMap = False)
+
+# calculate catchment area in m2 (local)
+catchment_area_m2_local = pcr.catchmenttotal(cell_area_m2_local, ldd_map_local)
 
 
-# calculate catchment area (local)
 
 
 # perform cdo for the variables that you want
-                                                 
+                               
+# precipitation
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_precipitation_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_temperature_global_monthly-average_1960_2019_basetier1.nc
+
+
+Evapotranspiration (open water, soil, crop transpiration, natural vegetation transpiration, consumptive water use from domestic and industry sectors)
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_totalEvaporation_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_nonIrrWaterConsumption_global_monthly-total_1960_2019_basetier1.nc
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_actualET_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_evaporation_from_irrigation_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_transpiration_from_irrigation_global_monthly-total_1960_2019_basetier1.nc
+
+Runoff (surface, interflow, groundwater recharge, groundwater discharge), 
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_directRunoff_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_interflowTotal_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_baseflow_global_monthly-total_1960_2019_basetier1.nc
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_gwRecharge_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_surfaceWaterInf_global_monthly-total_1960_2019_basetier1.nc
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_totalRunoff_global_monthly-total_1960_2019_basetier1.nc
+
+ Streamflow 
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_discharge_global_monthly-average_1960_2019_basetier1.nc
+
+ Storage changes (interception, snow, glacier, soil, surface water, groundwater) (monthly)
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_interceptStor_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_snowCoverSWE_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_snowFreeWater_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_storUppTotal_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_storLowTotal_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_storGroundwater_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_storGroundwaterFossil_global_monthly-average_1960_2019_basetier1.nc
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_surfaceWaterStorage_global_monthly-average_1960_2019_basetier1.nc
+
+ Water use: Water demand, water withdrawal, water consumption (total, domestic, industrial, irrigation, livestock)
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_totalGrossDemand_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_nonIrrGrossDemand_global_monthly-total_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_irrGrossDemand_global_monthly-total_1960_2019_basetier1.nc
+
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_totalWaterStorageThickness_global_monthly-average_1960_2019_basetier1.nc
+pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_waterBodyStorage_global_monthly-average_1960_2019_basetier1.nc
+
+ Surface water temperature                               
+                                                
+ Streamflow naturalized
