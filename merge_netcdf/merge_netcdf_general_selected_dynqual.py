@@ -543,15 +543,6 @@ else:
     number_of_clones = int(sys.argv[10])
     areas = ['M%07d'%i for i in range(1, number_of_clones + 1, 1)]
 
-
-
-
-
-
-
-
-
-
 # extent of the clone map
 if sys.argv[11] == "all_lats":
     latMin = -90 + deltaLat / 2

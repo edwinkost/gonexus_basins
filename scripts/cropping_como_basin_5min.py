@@ -152,14 +152,14 @@ catchment_area_m2_local = pcr.catchmenttotal(cell_area_m2_local, ldd_map_local)
 
 
 # perform the following cdo for the variables that you want
-# - selyear 1979/2019
+# - selyear 1980/2019
 # - sellonlatbox
                                
 
 # from 
 pcrglobwb_human_output_folder = "/depfg/sutan101/pcrglobwb_wri_aqueduct_2021/pcrglobwb_aqueduct_2021_monthly_annual_files/version_2021-09-16_merged/gswp3-w5e5/historical-reference/"
-pcrglobwb_natur_output_folder = 
-
+pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
+dynqual_daily_output_folder   =  
 
 # precipitation
 pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_precipitation_global_monthly-total_1960_2019_basetier1.nc
