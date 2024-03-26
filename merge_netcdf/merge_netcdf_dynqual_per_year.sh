@@ -30,7 +30,7 @@ do
 
 YEAR=${i}
 
-python merge_netcdf_general_selected_dynqual.py /scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/ /scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019/${YEAR}/ outDailyTotNC ${YEAR}-01-01 ${YEAR}-12-31 discharge NETCDF4 True 8 dynqual_selected all_lats &
+python merge_netcdf_general_selected_dynqual.py /scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/ /scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019/${YEAR}/ outDailyTotNC ${YEAR}-01-01 ${YEAR}-12-31 discharge,waterTemp NETCDF4 True 8 dynqual_selected all_lats &
 
 done
 
