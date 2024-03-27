@@ -9,12 +9,10 @@ def cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_fil
     output_file_name = out_file_name
     
     # perform the following cdo operations for the variables that you want
-    # -f nc4 -z zip 
-    # -selyear 1980/2019
-    # -sellonlatbox,-180,180,-90,90
     cmd  = "cdo -L -f nc4 "
     cmd += "-selyear,1981/2019 "
     cmd += "-sellonlatbox," + str(xmin) + "," + str(xmax) + "," + str(ymin) + "," + str(ymax) + " "
+    cmd += "-monavg "
     cmd += input_file_name + " "
     cmd += output_file_name + ".unmasked"
     print(cmd); os.system(cmd)

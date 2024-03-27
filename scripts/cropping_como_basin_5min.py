@@ -170,14 +170,11 @@ print(cmd); os.system(cmd)
 # - do cdo invertlat in order to flip y coordinates so that it will be consitent to our netcdf files
 cmd = 'cdo -L -f nc4 -invertlat basin_pgb.nc basin_pgb_invertlat.nc'
 print(cmd); os.system(cmd)
+mask = "basin_pgb_invertlat.nc"
 
-
-# source folders 
-pcrglobwb_human_output_folder = "/depfg/sutan101/pcrglobwb_wri_aqueduct_2021/pcrglobwb_aqueduct_2021_monthly_annual_files/version_2021-09-16_merged/gswp3-w5e5/historical-reference/"
-pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
-dynqual_daily_output_folder   = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
 
 # pcrglobwb_human_output files
+pcrglobwb_human_output_folder = "/depfg/sutan101/pcrglobwb_wri_aqueduct_2021/pcrglobwb_aqueduct_2021_monthly_annual_files/version_2021-09-16_merged/gswp3-w5e5/historical-reference/"
 nc_input_files = [
 "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_precipitation_global_monthly-total_1960_2019_basetier1.nc",
 "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_temperature_global_monthly-average_1960_2019_basetier1.nc",
@@ -200,18 +197,26 @@ nc_input_files = [
 "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_storGroundwater_global_monthly-average_1960_2019_basetier1.nc",
 "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_storGroundwaterFossil_global_monthly-average_1960_2019_basetier1.nc",
 "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_surfaceWaterStorage_global_monthly-average_1960_2019_basetier1.nc",
-"pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_totalWaterStorageThickness_global_monthly-average_1960_2019_basetier1.nc"
+"pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_totalWaterStorageThickness_global_monthly-average_1960_2019_basetier1.nc",
+"pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_discharge_global_monthly-average_1960_2019_basetier1.nc"
 ]
 for nc_input_file in nc_input_files:
     
-    mask          = "basin_pgb_invertlat.nc"
     inp_file_name = pcrglobwb_human_output_folder + "/" + nc_input_file
     out_file_name = nc_input_file.replace("global", str(code_name))
+    out_file_name = nc_input_file.replace("1960_2019", "1980_2019")
 
     etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
 
+# streamflow naturalized
+pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
+inp_file_name = pcrglobwb_natur_output_folder + "/" + "discharge_monthAvg_output_1979-2019.nc"
+out_file_name = "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_" + "discharge-naturalized" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
+etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
-# ~ # surface water temperature                               
-                                                
-# ~ # streamflow naturalized
+
+# dynqual water temperature
+dynqual_daily_output_folder   = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
+
+
