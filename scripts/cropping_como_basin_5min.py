@@ -172,7 +172,7 @@ print(cmd); os.system(cmd)
 # -f nc4 
 # -selyear 1980/2019
 # -sellonlatbox,-180,180,-90,90
-cmd = "-sellonlatbox," + str(xmin) + "," str(xmax) + "," + str(ymin) + "," str(ymax)                             
+cmd = "-sellonlatbox," + str(xmin) + "," + str(xmax) + "," + str(ymin) + "," str(ymax)                             
 print(cmd); os.system(cmd)
 
 
