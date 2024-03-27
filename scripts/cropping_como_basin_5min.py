@@ -203,8 +203,10 @@ nc_input_files = [
 for nc_input_file in nc_input_files:
     
     inp_file_name = pcrglobwb_human_output_folder + "/" + nc_input_file
+    
     out_file_name = nc_input_file.replace("global", str(code_name))
     out_file_name = nc_input_file.replace("1960_2019", "1980_2019")
+    out_file_name = nc_input_file.replace("gswp3-w5e5", "w5e5")
 
     etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
@@ -212,11 +214,21 @@ for nc_input_file in nc_input_files:
 # streamflow naturalized
 pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
 inp_file_name = pcrglobwb_natur_output_folder + "/" + "discharge_monthAvg_output_1979-2019.nc"
-out_file_name = "pcrglobwb_cmip6-isimip3-gswp3-w5e5_image-aqueduct_historical-reference_" + "discharge-naturalized" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
+out_file_name = "pcrglobwb_cmip6-isimip3-w5e5_image-aqueduct_historical-reference_" + "discharge-naturalized" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
 
 # dynqual water temperature
-dynqual_daily_output_folder   = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
+dynqual_output_folder = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
+inp_file_name = dynqual_output_folder + "/" + "waterTemp_monthAvg_output.nc"
+out_file_name = "dynqual_cmip6-isimip3-w5e5_historical-reference_" + "waterTemp" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
+etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = True)
+
+# dynqual discharge - daily
+dynqual_output_folder = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
+inp_file_name = dynqual_output_folder + "/" + "discharge_dailyTot_output.nc"
+out_file_name = "dynqual_cmip6-isimip3-w5e5_historical-reference_" + "discharge" + str(code_name) + "_daily_1980_2019_basetier1.nc"
+etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = False)
+
 
 
