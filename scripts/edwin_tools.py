@@ -20,7 +20,7 @@ def cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_fil
     print(cmd); os.system(cmd)
     
     # use area in 
-    cmd = "cdo -L -f nc4 -div " + os.path.basename(input_file_name) + ".unmasked " + mask + " " + output_file_name
+    cmd = "cdo -L -f nc4 -div " + os.path.basename(output_file_name) + ".unmasked " + mask + " " + output_file_name
     print(cmd); os.system(cmd)
     
     
