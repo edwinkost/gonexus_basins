@@ -213,7 +213,7 @@ for nc_input_file in nc_input_files:
 
 # streamflow naturalized
 pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
-inp_file_name = pcrglobwb_natur_output_folder + "/" + "discharge_monthAvg_output_1979-2019.nc"
+inp_file_name = pcrglobwb_natur_output_folder + "/" + "discharge_monthAvg_output_1979-2019_setgrid.nc"
 out_file_name = "pcrglobwb_cmip6-isimip3-w5e5_image-aqueduct_historical-reference_" + "discharge-naturalized" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
