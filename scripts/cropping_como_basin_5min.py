@@ -172,9 +172,11 @@ print(cmd); os.system(cmd)
 # -f nc4 
 # -selyear 1980/2019
 # -sellonlatbox,-180,180,-90,90
-                               
+cmd = "-sellonlatbox," + str(xmin) + "," str(xmax) + "," + str(ymin) + "," str(ymax)                             
+print(cmd); os.system(cmd)
 
-# from 
+
+# source folders 
 pcrglobwb_human_output_folder = "/depfg/sutan101/pcrglobwb_wri_aqueduct_2021/pcrglobwb_aqueduct_2021_monthly_annual_files/version_2021-09-16_merged/gswp3-w5e5/historical-reference/"
 pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
 dynqual_daily_output_folder   = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
