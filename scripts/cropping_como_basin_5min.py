@@ -133,7 +133,7 @@ ldd_map_local = pcr.lddrepair(pcr.ldd(vos.readPCRmapClone(v = ldd_map_file, \
                                                           absolutePath = None, \
                                                           isLddMap = True, \
                                                           cover = None, \
-                                                          isNomMap = False)
+                                                          isNomMap = False)))
 ldd_map_local = pcr.lddmask(ldd_map_local, pcr.defined(basin_5min_pcrglobwb_local))
 ldd_map_local_file_name = "ldd_5min_pcrglobwb_" + str(code_name) + "_local.map"
 pcr.report(ldd_map_local, ldd_map_local_file_name) 
