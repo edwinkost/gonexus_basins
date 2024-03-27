@@ -14,8 +14,10 @@ import edwin_tools as etls
 # code/name for the case area
 code_name = "como"
 
+
 # output folder (we will use this as our working folder as well)
-output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/test/" + str(code_name) + "/"
+output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/version_2024-03-27/" + str(code_name) + "/"
+# ~ output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/test/" + str(code_name) + "/"
 
 # 'tmp' (temporary) folder within the output_folder
 tmp_folder    = output_folder + "/tmp/"
@@ -25,7 +27,6 @@ cleanOutputDir = False
 if cleanOutputDir and os.path.exist(output_folder):
     shutil.rmtree(output_folder)
 if os.path.exists(output_folder) == False or os.path.exists(tmp_folder) == False: os.makedirs(tmp_folder)
-    
 
 # go to the the output folder
 os.chdir(output_folder)
@@ -229,6 +230,14 @@ dynqual_output_folder = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M2
 inp_file_name = dynqual_output_folder + "/" + "discharge_dailyTot_output.nc"
 out_file_name = "dynqual_cmip6-isimip3-w5e5_historical-reference_" + "discharge" + str(code_name) + "_daily_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = False)
+
+
+# move all unmasked files to a separate folder
+os.system('mkdir unmasked')
+os.system('mv *.unmasked unmasked')
+
+# clean up temporary and unnecessary files
+os.system('rm *.tif* ; rm *global* ; rm *basin_pgb*')
 
 
 
