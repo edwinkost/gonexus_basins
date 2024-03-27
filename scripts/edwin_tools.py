@@ -5,7 +5,8 @@ import os
 
 def cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name):
 
-    input_file_name = inp_file_name
+    input_file_name  = inp_file_name
+    output_file_name = out_file_name
     
     # perform the following cdo operations for the variables that you want
     # -f nc4 -z zip 
