@@ -14,7 +14,7 @@ import virtualOS as vos
 code_name = "como"
 
 # output folder (we will use this as our working folder as well)
-output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/" + str(code_name) + "/"
+output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/test/" + str(code_name) + "/"
 
 # 'tmp' (temporary) folder within the output_folder
 tmp_folder    = output_folder + "/tmp/"
@@ -140,7 +140,7 @@ pcr.report(ldd_map_local, ldd_map_local_file_name)
 
 
 # calculate strahler order (local)
-strahler_order_local = pcr.streamoder(ldd_map_local)
+strahler_order_local = pcr.streamorder(ldd_map_local)
 strahler_order_local_file_name = "strahler_order_5min_pcrglobwb_" + str(code_name) + "_local.map"
 pcr.report(strahler_order_local, strahler_order_local_file_name) 
 
