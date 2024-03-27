@@ -204,8 +204,10 @@ nc_input_files = [
 ]
 for nc_input_file in nc_input_files:
     
+    mask          = "basin_pgb_invertlat.nc"
     inp_file_name = nc_input_file
     out_file_name = nc_input_file.replace("global", str(code_name))
+
     etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
 
