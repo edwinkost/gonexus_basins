@@ -86,11 +86,11 @@ basin_5min_pcrglobwb = pcr.catchment(ldd_map, basin_5min_pcrglobwb)
 basin_5min_pcrglobwb = pcr.ifthen(basin_5min_pcrglobwb, basin_5min_pcrglobwb)
 # ~ pcr.aguila(basin_5min_pcrglobwb)
 
-# - include inland sinks
-pits_on_basin_5min_original        = pcr.ifthen(basin_5min_original, pcr.pit(ldd_map))
-catchments_flowing_to_pits         = pcr.catchment(ldd_map, pits_on_basin_5min_original)
-catchments_flowing_to_pits_boolean = pcr.ifthen(pcr.scalar(catchments_flowing_to_pits) > 0, pcr.boolean(1.0))
-basin_5min_pcrglobwb = pcr.cover(basin_5min_pcrglobwb, catchments_flowing_to_pits_boolean)
+# ~ # - include inland sinks
+# ~ pits_on_basin_5min_original        = pcr.ifthen(basin_5min_original, pcr.pit(ldd_map))
+# ~ catchments_flowing_to_pits         = pcr.catchment(ldd_map, pits_on_basin_5min_original)
+# ~ catchments_flowing_to_pits_boolean = pcr.ifthen(pcr.scalar(catchments_flowing_to_pits) > 0, pcr.boolean(1.0))
+# ~ basin_5min_pcrglobwb = pcr.cover(basin_5min_pcrglobwb, catchments_flowing_to_pits_boolean)
 # ~ pcr.aguila(basin_5min_pcrglobwb)
 
 # - save the file as a nominal map
