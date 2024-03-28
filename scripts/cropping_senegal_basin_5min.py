@@ -85,6 +85,14 @@ basin_5min_pcrglobwb = pcr.ifthen(basin_5min_pcrglobwb_scalar > 0.0, pcr.boolean
 basin_5min_pcrglobwb = pcr.catchment(ldd_map, basin_5min_pcrglobwb)
 basin_5min_pcrglobwb = pcr.ifthen(basin_5min_pcrglobwb, basin_5min_pcrglobwb)
 # ~ pcr.aguila(basin_5min_pcrglobwb)
+
+# - include cells flowing to inland sinks
+ldd_only_at_basin_5min_original = pcr.ifthen(basin_5min_original, pcr.lddrepair(pcr.ldd(ldd_map)))
+ldd_only_at_basin_5min_original_catchment_area = pcr.catchmenttotal(cell_area_m2, ldd_only_at_basin_5min_original)
+additional_cells = pcr.ifthen(ldd_only_at_basin_5min_original_catchment_area == catchment_area_m2, pcr.boolean(1.0))
+
+basin_5min_pcrglobwb = pcr.cover(basin_5min_pcrglobwb, additional_cells)
+
 # - save the file as a nominal map
 basin_5min_pcrglobwb_global_file_name = "basin_5min_pcrglobwb_" + str(code_name) + "_global.map" 
 pcr.report(pcr.nominal(basin_5min_pcrglobwb), basin_5min_pcrglobwb_global_file_name) 
