@@ -60,8 +60,12 @@ print(cmd); os.system(cmd)
 # - fixing the y orientation in the pcraster map 
 cmd = 'mapattr -s -P yb2t tmp_100m.tif.map'
 print(cmd); os.system(cmd)
+# - rename tmp_100m.tif.map and use it as the "original_input_file" for further processing steps
+cmd = 'mv tmp_100m.tif.map ' + str(code_name) + "_100m.map" 
+print(cmd); os.system(cmd)
+original_input_file = str(code_name) + "_100m.map"
 # - project to 5 arcmin 
-cmd = 'gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -tr ' + str(cell_size_in_string) + ' ' + str(cell_size_in_string) + ' -te -180 -90 180 90 ' + str("tmp_100m.tif.map") + " " + os.path.basename(original_input_file) + ".tif"
+cmd = 'gdalwarp -t_srs "+proj=longlat +ellps=WGS84" -tr ' + str(cell_size_in_string) + ' ' + str(cell_size_in_string) + ' -te -180 -90 180 90 ' + str(original_input_file) + " " + os.path.basename(original_input_file) + ".tif"
 print(cmd); os.system(cmd)
 # - convert to map
 cmd = 'gdal_translate -of PCRaster ' + os.path.basename(original_input_file) + ".tif " + os.path.basename(original_input_file) + ".tif.map"
