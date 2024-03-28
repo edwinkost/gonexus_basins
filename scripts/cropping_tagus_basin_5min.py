@@ -12,7 +12,7 @@ import virtualOS as vos
 import edwin_tools as etls
 
 # code/name for the case area
-code_name = "segura"
+code_name = "tagus"
 
 # original input file provided by our partner
 original_input_file = "/scratch/depfg/sutan101/data/gonexus_basins/extracted/Tagus/shp/tagus_3sec.tif"
