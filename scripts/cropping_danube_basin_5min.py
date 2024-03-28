@@ -15,7 +15,7 @@ import edwin_tools as etls
 code_name = "danube"
 
 # original input file provided by our partner
-original_input_file = "/scratch/depfg/sutan101/data/gonexus_basins/extracted/danube/subcatchment_id_danube_05arcmin.map"
+original_input_file = "/scratch/depfg/sutan101/data/gonexus_basins/extracted/danube/defined_subcatchment_id_danube_05arcmin.map"
 
 
 # output folder (we will use this as our working folder as well)
