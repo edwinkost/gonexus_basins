@@ -16,7 +16,7 @@ code_name = "como"
 
 
 # output folder (we will use this as our working folder as well)
-output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/version_2024-03-27/" + str(code_name) + "/"
+output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/version_2024-03-28/" + str(code_name) + "/"
 # ~ output_folder = "/scratch/depfg/sutan101/gonexus_basin_case_studies/test/" + str(code_name) + "/"
 
 # 'tmp' (temporary) folder within the output_folder
@@ -203,12 +203,15 @@ nc_input_files = [
 ]
 for nc_input_file in nc_input_files:
     
+    # input file name
     inp_file_name = pcrglobwb_human_output_folder + "/" + nc_input_file
     
+    # output file name
     out_file_name = nc_input_file.replace("global", str(code_name))
-    out_file_name = nc_input_file.replace("1960_2019", "1980_2019")
-    out_file_name = nc_input_file.replace("gswp3-w5e5", "w5e5")
+    out_file_name = out_file_name.replace("gswp3-w5e5", "w5e5")
+    out_file_name = out_file_name.replace("1960_2019", "1980_2019")
 
+    # cropping to the model region
     etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
 
@@ -219,16 +222,20 @@ out_file_name = "pcrglobwb_cmip6-isimip3-w5e5_image-aqueduct_historical-referenc
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
 
-# dynqual water temperature
-dynqual_output_folder = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
-inp_file_name = dynqual_output_folder + "/" + "waterTemp_monthAvg_output.nc"
-out_file_name = "dynqual_cmip6-isimip3-w5e5_historical-reference_" + "waterTemp" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
+# ~ sutan101@node033.cluster:/scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019$ ls -lah *.nc
+# ~ -r--r--r-- 1 sutan101 depfg 100G Mar 27 14:09 discharge_dailyTot_output_1980-2019.nc
+# ~ -r--r--r-- 1 sutan101 depfg  54G Mar 27 12:41 waterTemp_dailyTot_output_1980-2019.nc
+
+# dynqual water temperature - monthly average
+dynqual_output_folder = "/scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019/" 
+inp_file_name = dynqual_output_folder + "/" + "waterTemp_dailyTot_output_1980-2019.nc"
+out_file_name = "pcrglobwb_dynqual_cmip6-isimip3-w5e5_historical-reference_" + "waterTemp" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = True)
 
 # dynqual discharge - daily
-dynqual_output_folder = "/scratch/depfg/graha010/DYNQUAL_GLOBAL_OUTPUT_ONLINE/M26/netcdf/" 
-inp_file_name = dynqual_output_folder + "/" + "discharge_dailyTot_output.nc"
-out_file_name = "dynqual_cmip6-isimip3-w5e5_historical-reference_" + "discharge" + str(code_name) + "_daily_1980_2019_basetier1.nc"
+dynqual_output_folder = "/scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019/" 
+inp_file_name = dynqual_output_folder + "/" + "discharge_dailyTot_output_1980-2019.nc"
+out_file_name = "pcrglobwb_dynqual_cmip6-isimip3-w5e5_historical-reference_" + "discharge" + str(code_name) + "_daily_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = False)
 
 
@@ -238,6 +245,5 @@ os.system('mv *.unmasked unmasked')
 
 # clean up temporary and unnecessary files
 os.system('rm *.tif* ; rm *global* ; rm *basin_pgb*')
-
 
 
