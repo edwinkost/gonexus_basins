@@ -89,7 +89,7 @@ basin_5min_pcrglobwb = pcr.ifthen(basin_5min_pcrglobwb, basin_5min_pcrglobwb)
 # - include inland sinks
 pits_on_basin_5min_original        = pcr.ifthen(basin_5min_original, pcr.pit(ldd_map))
 catchments_flowing_to_inland_sinks = pcr.defined(pcr.catchment(ldd_map, pits_on_basin_5min_original))
-catchments_flowing_to_inland_sinks = pcr.ifthen(catchments_flow_to_inland_sinks, catchments_flow_to_inland_sinks)
+catchments_flowing_to_inland_sinks = pcr.ifthen(catchments_flowing_to_inland_sinks, catchments_flowing_to_inland_sinks)
 
 basin_5min_pcrglobwb = pcr.cover(basin_5min_pcrglobwb, catchments_flowing_to_inland_sinks)
 
