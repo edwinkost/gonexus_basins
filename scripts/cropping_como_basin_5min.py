@@ -218,7 +218,7 @@ for nc_input_file in nc_input_files:
 # streamflow naturalized
 pcrglobwb_natur_output_folder = "/scratch/depfg/sutan101/pcrglobwb_aqueduct_2021_naturalized/version_2021-09-16_naturalized/gswp3-w5e5/historical-reference/selected_1979-2019/"
 inp_file_name = pcrglobwb_natur_output_folder + "/" + "discharge_monthAvg_output_1979-2019_setgrid.nc"
-out_file_name = "pcrglobwb_cmip6-isimip3-w5e5_image-aqueduct_historical-reference_" + "discharge-naturalized" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
+out_file_name = "pcrglobwb_cmip6-isimip3-w5e5_image-aqueduct_historical-reference_" + "discharge-naturalized_" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name)
 
 
@@ -229,13 +229,13 @@ etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_fi
 # dynqual water temperature - monthly average
 dynqual_output_folder = "/scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019/" 
 inp_file_name = dynqual_output_folder + "/" + "waterTemp_dailyTot_output_1980-2019.nc"
-out_file_name = "pcrglobwb_dynqual_cmip6-isimip3-w5e5_historical-reference_" + "waterTemp" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
+out_file_name = "pcrglobwb_dynqual_cmip6-isimip3-w5e5_historical-reference_" + "waterTemp_" + str(code_name) + "_monthly-average_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = True)
 
 # dynqual discharge - daily
 dynqual_output_folder = "/scratch/depfg/sutan101/dynqual_output_from_duncan/1980-2019/" 
 inp_file_name = dynqual_output_folder + "/" + "discharge_dailyTot_output_1980-2019.nc"
-out_file_name = "pcrglobwb_dynqual_cmip6-isimip3-w5e5_historical-reference_" + "discharge" + str(code_name) + "_daily_1980_2019_basetier1.nc"
+out_file_name = "pcrglobwb_dynqual_cmip6-isimip3-w5e5_historical-reference_" + "discharge_" + str(code_name) + "_daily_1980_2019_basetier1.nc"
 etls.cdo_crop_file_1980_2019(inp_file_name, mask, xmin, xmax, ymin, ymax, out_file_name, monavg = False)
 
 
