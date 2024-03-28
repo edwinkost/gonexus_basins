@@ -91,7 +91,7 @@ pits_on_basin_5min_original        = pcr.ifthen(basin_5min_original, pcr.pit(ldd
 catchments_flowing_to_pits         = pcr.catchment(ldd_map, pits_on_basin_5min_original)
 catchments_flowing_to_pits_boolean = pcr.ifthen(pcr.scalar(catchments_flowing_to_pits) > 0, pcr.boolean(1.0))
 
-basin_5min_pcrglobwb = pcr.cover(basin_5min_pcrglobwb, catchments_flowing_to_inland_sinks)
+basin_5min_pcrglobwb = pcr.cover(basin_5min_pcrglobwb, catchments_flowing_to_pits_boolean)
 
 # - save the file as a nominal map
 basin_5min_pcrglobwb_global_file_name = "basin_5min_pcrglobwb_" + str(code_name) + "_global.map" 
