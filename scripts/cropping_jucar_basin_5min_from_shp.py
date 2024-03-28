@@ -52,7 +52,7 @@ catchment_area_m2 = pcr.catchmenttotal(cell_area_m2, ldd_map)
 
 # convert the original basin input file to 5 arcmin resolution at the global extent, and read it
 # - rasterize the shp file to 100 m resolution 
-cmd = 'gdalrasterize -burn 1 -tr 100 100 ' + original_input_file + " tmp_100m.tif"
+cmd = 'gdal_rasterize -burn 1 -tr 100 100 ' + original_input_file + " tmp_100m.tif"
 print(cmd); os.system(cmd)
 # - convert to a nominal pcrster map
 cmd = 'pcrcalc tmp_100m.tif.map = "if(tmp_100m.tif gt 0, nominal(1.0))"'
