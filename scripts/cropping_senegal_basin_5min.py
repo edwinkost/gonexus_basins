@@ -15,7 +15,7 @@ import edwin_tools as etls
 code_name = "senegal"
 
 # original input file provided by our partner
-original_input_file = "/scratch/depfg/sutan101/data/gonexus_basins/extracted/senegal/senegal_watershed_3sec.tif
+original_input_file = "/scratch/depfg/sutan101/data/gonexus_basins/extracted/senegal/senegal_watershed_3sec.tif"
 
 
 # output folder (we will use this as our working folder as well)
